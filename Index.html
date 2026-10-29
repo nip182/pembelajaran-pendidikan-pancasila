@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio Kreatif: Prinsip Ritme Seni Rupa | SBdP Kelas 6 SD</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Fredoka & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Tone.js for Native Synthesizer Audio Effects -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            fredoka: ['Fredoka', 'cursive', 'sans-serif'],
+            poppins: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            art: {
+              purple: '#7c3aed',
+              indigo: '#4f46e5',
+              pink: '#ec4899',
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              cyan: '#06b6d4',
+              rose: '#f43f5e',
+              coral: '#fb7185',
+              dark: '#0f172a'
+            }
+          },
+          animation: {
+            'bounce-soft': 'bounce 2.6s infinite',
+            'float': 'float 3.2s ease-in-out infinite',
+            'spin-slow': 'spin 12s linear infinite',
+            'pulse-glow': 'pulseGlow 2.2s infinite',
+            'wave-flow': 'waveFlow 4s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-7px)' }
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+              '50%': { opacity: '0.88', transform: 'scale(1.02)' }
+            },
+            waveFlow: {
+              '0%, 100%': { transform: 'translateX(0px)' },
+              '50%': { transform: 'translateX(10px)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+      overflow-x: hidden;
+    }
+    .font-fun {
+      font-family: 'Fredoka', cursive, sans-serif;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      color: #ffffff;
+      box-shadow: 0 10px 20px -3px rgba(124, 58, 237, 0.4);
+      border-color: transparent;
+      transform: translateY(-2px);
+    }
+    .card-zoom {
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .card-zoom:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 30px rgba(124, 58, 237, 0.1);
+    }
+    .rhythm-bar-anim span {
+      display: inline-block;
+      width: 4px;
+      height: 14px;
+      background: #7c3aed;
+      border-radius: 2px;
+      animation: rhythmWave 1.1s ease-in-out infinite;
+    }
+    .rhythm-bar-anim span:nth-child(2) { animation-delay: 0.15s; height: 20px; background: #ec4899; }
+    .rhythm-bar-anim span:nth-child(3) { animation-delay: 0.3s; height: 10px; background: #f59e0b; }
+    .rhythm-bar-anim span:nth-child(4) { animation-delay: 0.45s; height: 24px; background: #06b6d4; }
+    .rhythm-bar-anim span:nth-child(5) { animation-delay: 0.6s; height: 16px; background: #10b981; }
+    @keyframes rhythmWave {
+      0%, 100% { transform: scaleY(0.5); }
+      50% { transform: scaleY(1.3); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gradient-to-b from-purple-50/60 via-pink-50/30 to-amber-50/40">
+
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-purple-100 shadow-xs transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Logo & Branding -->
+        <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('definisi')">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-purple-600 via-pink-500 to-amber-400 flex items-center justify-center text-white text-xl sm:text-2xl shadow-md transform -rotate-3 hover:rotate-0 transition-transform">
+            <i class="fa-solid fa-palette animate-bounce-soft"></i>
+          </div>
+          <div>
+            <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-100 text-purple-800 tracking-wide">
+              SBDP KELAS 6 SD • SENI RUPA
+            </span>
+            <h1 class="font-fun text-base sm:text-xl font-bold text-slate-800 leading-tight">
+              Studio Ritme Seni Rupa 🎨✨
+            </h1>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation Tabs -->
+        <div class="hidden xl:flex items-center gap-1.5">
+          <button onclick="switchTab('definisi')" class="nav-item px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:text-purple-700 hover:bg-purple-50 transition">🎼 1. Konsep Ritme</button>
+          <button onclick="switchTab('unsur')" class="nav-item px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:text-purple-700 hover:bg-purple-50 transition">✨ 2. Lima Unsur Ritme</button>
+          <button onclick="switchTab('simulator')" class="nav-item px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:text-purple-700 hover:bg-purple-50 transition">🧪 3. Lab Pola Visual</button>
+          <button onclick="switchTab('budaya')" class="nav-item px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:text-purple-700 hover:bg-purple-50 transition">🏛️ 4. Karya Nusantara</button>
+          <button onclick="switchTab('kanvas')" class="nav-item px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:text-purple-700 hover:bg-purple-50 transition">🖌️ 5. Kanvas Gambar</button>
+          <button onclick="switchTab('kuis')" class="nav-item px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-amber-500 to-pink-500 text-white hover:from-amber-600 hover:to-pink-600 shadow-md transition flex items-center gap-1.5 transform hover:scale-105">
+            <i class="fa-solid fa-trophy"></i> Kuis Pelukis Cilik
+          </button>
+        </div>
+
+        <!-- Audio Speed Control & Mobile Menu Toggle -->
+        <div class="flex items-center gap-2">
+          <div class="hidden sm:flex items-center gap-1 bg-purple-50 p-1 rounded-xl text-xs font-semibold text-purple-950 border border-purple-200">
+            <span class="px-2 text-purple-700"><i class="fa-solid fa-volume-high mr-1"></i>Suara:</span>
+            <button id="audioNormalBtn" onclick="setAudioSpeed(1.0)" class="px-2 py-1 rounded-lg bg-white text-purple-700 shadow-xs font-bold">Normal</button>
+            <button id="audioSlowBtn" onclick="setAudioSpeed(0.75)" class="px-2 py-1 rounded-lg text-purple-900 hover:bg-white/80">Lambat 🐢</button>
+          </div>
+          <button onclick="toggleMobileMenu()" class="xl:hidden p-2.5 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100" aria-label="Buka Menu Mobile">
+            <i class="fa-solid fa-bars text-lg"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobileMenu" class="hidden xl:hidden bg-white border-b border-slate-100 px-4 pt-2 pb-4 space-y-1">
+      <button onclick="switchTab('definisi'); toggleMobileMenu();" class="block w-full text-left px-3 py-2.5 rounded-xl text-slate-700 hover:bg-purple-50 font-medium">🎼 1. Konsep & Definisi Ritme (Irama Seni Rupa)</button>
+      <button onclick="switchTab('unsur'); toggleMobileMenu();" class="block w-full text-left px-3 py-2.5 rounded-xl text-slate-700 hover:bg-purple-50 font-medium">✨ 2. Lima Unsur Seni Rupa dalam Ritme (Titik, Garis, Bidang, Bentuk, Warna)</button>
+      <button onclick="switchTab('simulator'); toggleMobileMenu();" class="block w-full text-left px-3 py-2.5 rounded-xl text-slate-700 hover:bg-purple-50 font-medium">🧪 3. Lab Generator Pola Ritme Interaktif</button>
+      <button onclick="switchTab('budaya'); toggleMobileMenu();" class="block w-full text-left px-3 py-2.5 rounded-xl text-slate-700 hover:bg-purple-50 font-medium">🏛️ 4. Penerapan Ritme pada Batik & Seni Tradisi</button>
+      <button onclick="switchTab('kanvas'); toggleMobileMenu();" class="block w-full text-left px-3 py-2.5 rounded-xl text-slate-700 hover:bg-purple-50 font-medium">🖌️ 5. Kanvas Gambar Cilik (Praktik Ritme Sendiri)</button>
+      <button onclick="switchTab('kuis'); toggleMobileMenu();" class="block w-full text-left px-3 py-2.5 rounded-xl bg-purple-600 text-white font-bold">🏆 6. Kuis Pelukis Cilik Ritme</button>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-8">
+    
+    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-purple-700 via-pink-600 to-amber-500 text-white p-6 sm:p-10 shadow-xl">
+      <div class="absolute -right-8 -bottom-10 opacity-15 pointer-events-none text-9xl">
+        <i class="fa-solid fa-shapes"></i>
+      </div>
+      
+      <div class="relative z-10 max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide">
+          <i class="fa-solid fa-paintbrush text-amber-300"></i> SBdP Kelas 6 SD • Modul Seni Rupa Prinsip Ritme
+        </div>
+        <h2 class="font-fun text-2xl sm:text-4xl font-bold tracking-tight text-white leading-tight">
+          Menghidupkan Gambar dengan <span class="text-amber-300 underline decoration-wavy decoration-pink-300">Prinsip Ritme (Irama)</span>! 🎶🎨
+        </h2>
+        <p class="text-purple-100 text-xs sm:text-base leading-relaxed">
+          Tahukah kamu bahwa sebuah gambar yang diam bisa terasa bergerak dan bernyanyi merdu di mata kita? Rahasianya ada pada <strong>Ritme (Irama)</strong>! Dengan menyusun unsur <strong>Titik, Garis, Bidang, Bentuk, dan Warna</strong> secara teratur atau bervariasi, karyamu akan terlihat dinamis, harmonis, dan sangat memikat.
+        </p>
+
+        <!-- Quick CTA Buttons with Sound -->
+        <div class="pt-2 flex flex-wrap gap-3">
+          <button onclick="speakIndoText('Halo seniman cilik kelas enam! Selamat datang di modul seni rupa prinsip ritme. Mari kita pelajari bagaimana titik, garis, bidang, bentuk, dan warna berpadu menciptakan irama visual yang indah!'); playMelodyTone();" class="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-4 py-2.5 rounded-2xl shadow-md transition transform active:scale-95 text-xs sm:text-sm">
+            <i class="fa-solid fa-volume-high text-purple-950"></i> Dengarkan Penjelasan Guru! 🎙️
+          </button>
+          <button onclick="switchTab('simulator')" class="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white border border-white/40 font-semibold px-4 py-2.5 rounded-2xl transition text-xs sm:text-sm">
+            <i class="fa-solid fa-flask-vial text-amber-300"></i> Buka Lab Generator Pola 🧪
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2 overflow-x-auto pb-2 custom-scroll">
+      <button id="tab-definisi" onclick="switchTab('definisi')" class="tab-btn active shrink-0 px-4 py-2.5 rounded-2xl font-fun text-xs sm:text-sm font-semibold border border-slate-200 bg-white text-slate-700 transition">
+        🎼 1. Konsep Ritme
+      </button>
+      <button id="tab-unsur" onclick="switchTab('unsur')" class="tab-btn shrink-0 px-4 py-2.5 rounded-2xl font-fun text-xs sm:text-sm font-semibold border border-slate-200 bg-white text-slate-700 transition">
+        ✨ 2. Lima Unsur Ritme
+      </button>
+      <button id="tab-simulator" onclick="switchTab('simulator')" class="tab-btn shrink-0 px-4 py-2.5 rounded-2xl font-fun text-xs sm:text-sm font-semibold border border-slate-200 bg-white text-slate-700 transition">
+        🧪 3. Lab Pola Visual
+      </button>
+      <button id="tab-budaya" onclick="switchTab('budaya')" class="tab-btn shrink-0 px-4 py-2.5 rounded-2xl font-fun text-xs sm:text-sm font-semibold border border-slate-200 bg-white text-slate-700 transition">
+        🏛️ 4. Karya Nusantara
+      </button>
+      <button id="tab-kanvas" onclick="switchTab('kanvas')" class="tab-btn shrink-0 px-4 py-2.5 rounded-2xl font-fun text-xs sm:text-sm font-semibold border border-slate-200 bg-white text-slate-700 transition">
+        🖌️ 5. Kanvas Gambar
+      </button>
+      <button id="tab-kuis" onclick="switchTab('kuis')" class="tab-btn shrink-0 px-4 py-2.5 rounded-2xl font-fun text-xs sm:text-sm font-semibold border border-slate-200 bg-white text-slate-700 transition">
+        🏆 6. Kuis Juara
+      </button>
+    </div>
+
+    <section id="content-definisi" class="tab-content space-y-6">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100 space-y-8">
+        
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-bold rounded-full uppercase tracking-wider">
+            Prinsip Dasar Desain Seni Rupa
+          </span>
+          <h3 class="font-fun text-2xl sm:text-3xl font-bold text-slate-800">
+            Apa Itu Ritme (Irama) dalam Seni Rupa?
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-500">
+            Jika dalam musik irama tercipta dari ketukan nada, maka dalam seni rupa irama tercipta dari <strong>pengulangan unsur visual secara teratur dan selaras</strong>.
+          </p>
+        </div>
+
+        <!-- Concept Definition Visual Box -->
+        <div class="p-6 rounded-3xl bg-gradient-to-br from-purple-900 via-slate-900 to-indigo-950 text-white space-y-5 shadow-lg border border-purple-800/40">
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-purple-800/60 pb-4">
+            <div class="flex items-center gap-3">
+              <span class="w-12 h-12 rounded-2xl bg-purple-600 text-white flex items-center justify-center text-2xl shadow-md">
+                <i class="fa-solid fa-music"></i>
+              </span>
+              <div>
+                <span class="text-xs font-bold text-pink-400 uppercase tracking-wider">Pengertian Resmi</span>
+                <h4 class="font-fun text-xl sm:text-2xl font-bold text-white">Definisi Ritme Seni Rupa</h4>
+              </div>
+            </div>
+            <button onclick="speakIndoText('Ritme atau irama adalah pengulangan satu atau lebih unsur seni rupa seperti titik, garis, bidang, bentuk, atau warna secara teratur dan terus menerus, sehingga menimbulkan kesan gerak, kesatuan, dan keindahan harmonis pada karya seni.')" class="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-volume-high"></i> Dengarkan Definisi 🎙️
+            </button>
+          </div>
+
+          <p class="text-xs sm:text-base text-slate-200 leading-relaxed">
+            <strong>Ritme (Irama)</strong> adalah prinsip penyusunan karya seni rupa dengan melakukan <strong>pengulangan (repetisi)</strong> satu atau lebih unsur seni rupa (seperti titik, garis, bidang, bentuk, atau warna) secara teratur, terencana, dan berkesinambungan. Ritme menuntun mata orang yang melihat lukisan untuk bergerak mengikuti pola irama dari satu bagian ke bagian lain!
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2 text-xs">
+            <div class="p-3 bg-white/10 rounded-2xl border border-white/10 space-y-1">
+              <strong class="text-amber-300 block"><i class="fa-solid fa-arrows-spin mr-1"></i> 1. Kesan Gerak (*Movement*):</strong>
+              <p class="text-slate-300">Gambar yang diam tampak hidup dan mengalir seolah memiliki denyut ritmis.</p>
+            </div>
+            <div class="p-3 bg-white/10 rounded-2xl border border-white/10 space-y-1">
+              <strong class="text-pink-300 block"><i class="fa-solid fa-puzzle-piece mr-1"></i> 2. Kesatuan Harmonis (*Harmony*):</strong>
+              <p class="text-slate-300">Menghubungkan berbagai bagian gambar agar tidak berdiri sendiri-sendiri.</p>
+            </div>
+            <div class="p-3 bg-white/10 rounded-2xl border border-white/10 space-y-1">
+              <strong class="text-cyan-300 block"><i class="fa-solid fa-eye mr-1"></i> 3. Mengarahkan Pandangan:</strong>
+              <p class="text-slate-300">Menjadi jalur penjelajah mata saat menikmati karya seni secara menyeluruh.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Types of Rhythm Patterns in Visual Art -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h4 class="font-fun text-xl font-bold text-slate-800 flex items-center gap-2">
+              <i class="fa-solid fa-layer-group text-purple-600"></i> Empat Pola Ritme yang Sering Digunakan
+            </h4>
+            <span class="text-xs text-slate-500">Klik audio pada tiap kartu:</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            
+            <!-- Type 1: Repetisi Murni / Teratur -->
+            <div class="p-5 rounded-3xl bg-purple-50/70 border-2 border-purple-200 card-zoom flex flex-col justify-between space-y-3">
+              <div class="space-y-2">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-200 text-purple-900">Pola 1</span>
+                <h5 class="font-fun font-bold text-slate-800 text-base">Ritme Teratur (*Repetition*)</h5>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Pengulangan bentuk, jarak, dan ukuran yang <strong>sama persis</strong> secara konsisten seperti barisan pagar atau ubin kotak-kotak.
+                </p>
+
+                <!-- Visual Miniature -->
+                <div class="p-2.5 bg-white rounded-xl border border-purple-200 flex items-center justify-around h-14">
+                  <div class="w-6 h-6 rounded-lg bg-purple-600"></div>
+                  <div class="w-6 h-6 rounded-lg bg-purple-600"></div>
+                  <div class="w-6 h-6 rounded-lg bg-purple-600"></div>
+                  <div class="w-6 h-6 rounded-lg bg-purple-600"></div>
+                </div>
+              </div>
+
+              <button onclick="speakIndoText('Ritme teratur adalah pengulangan bentuk, ukuran, dan jarak yang sama persis secara konsisten, seperti deretan pagar atau lantai ubin.')" class="w-full py-2 bg-purple-100 hover:bg-purple-200 text-purple-900 font-bold rounded-xl text-xs transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-volume-high"></i> Pelajari Pola 1 🎙️
+              </button>
+            </div>
+
+            <!-- Type 2: Alternasi / Selang-Seling -->
+            <div class="p-5 rounded-3xl bg-pink-50/70 border-2 border-pink-200 card-zoom flex flex-col justify-between space-y-3">
+              <div class="space-y-2">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-pink-200 text-pink-900">Pola 2</span>
+                <h5 class="font-fun font-bold text-slate-800 text-base">Ritme Alternasi (*Selang-Seling*)</h5>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Pengulangan dua atau lebih unsur yang bergantian secara teratur (misal: lingkaran &rarr; segitiga &rarr; lingkaran &rarr; segitiga).
+                </p>
+
+                <!-- Visual Miniature -->
+                <div class="p-2.5 bg-white rounded-xl border border-pink-200 flex items-center justify-around h-14">
+                  <div class="w-6 h-6 rounded-full bg-pink-600"></div>
+                  <div class="w-6 h-6 bg-amber-500 transform rotate-45"></div>
+                  <div class="w-6 h-6 rounded-full bg-pink-600"></div>
+                  <div class="w-6 h-6 bg-amber-500 transform rotate-45"></div>
+                </div>
+              </div>
+
+              <button onclick="speakIndoText('Ritme alternasi adalah pengulangan unsur yang disusun berselang-seling secara teratur, misalnya lingkaran bergantian dengan segitiga, atau hitam bergantian dengan putih.')" class="w-full py-2 bg-pink-100 hover:bg-pink-200 text-pink-900 font-bold rounded-xl text-xs transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-volume-high"></i> Pelajari Pola 2 🎙️
+              </button>
+            </div>
+
+            <!-- Type 3: Progresi / Gradasi -->
+            <div class="p-5 rounded-3xl bg-amber-50/70 border-2 border-amber-200 card-zoom flex flex-col justify-between space-y-3">
+              <div class="space-y-2">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-200 text-amber-900">Pola 3</span>
+                <h5 class="font-fun font-bold text-slate-800 text-base">Ritme Progresi (*Gradasi*)</h5>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Pengulangan unsur dengan perubahan ukuran, jarak, atau warna secara berangsur-angsur (dari kecil ke besar atau terang ke gelap).
+                </p>
+
+                <!-- Visual Miniature -->
+                <div class="p-2.5 bg-white rounded-xl border border-amber-200 flex items-center justify-around h-14">
+                  <div class="w-2.5 h-2.5 rounded-full bg-amber-500"></div>
+                  <div class="w-4 h-4 rounded-full bg-amber-500"></div>
+                  <div class="w-6 h-6 rounded-full bg-amber-500"></div>
+                  <div class="w-8 h-8 rounded-full bg-amber-500"></div>
+                </div>
+              </div>
+
+              <button onclick="speakIndoText('Ritme progresi atau gradasi adalah pengulangan dengan perubahan bertingkat, seperti ukuran dari kecil bertambah besar, atau warna dari muda menuju tua.')" class="w-full py-2 bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold rounded-xl text-xs transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-volume-high"></i> Pelajari Pola 3 🎙️
+              </button>
+            </div>
+
+            <!-- Type 4: Mengalir / Flowing Wave -->
+            <div class="p-5 rounded-3xl bg-cyan-50/70 border-2 border-cyan-200 card-zoom flex flex-col justify-between space-y-3">
+              <div class="space-y-2">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-cyan-200 text-cyan-900">Pola 4</span>
+                <h5 class="font-fun font-bold text-slate-800 text-base">Ritme Mengalir (*Flowing*)</h5>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Pengulangan garis lengkung atau gelombang yang dinamis dan berkesinambungan laksana aliran ombak samudra atau hembusan angin.
+                </p>
+
+                <!-- Visual Miniature -->
+                <div class="p-2.5 bg-white rounded-xl border border-cyan-200 flex items-center justify-center h-14 overflow-hidden">
+                  <svg viewBox="0 0 160 30" class="w-full h-8">
+                    <path d="M 0 15 Q 20 0, 40 15 T 80 15 T 120 15 T 160 15" fill="none" stroke="#06b6d4" stroke-width="4" stroke-linecap="round" />
+                  </svg>
+                </div>
+              </div>
+
+              <button onclick="speakIndoText('Ritme mengalir adalah pengulangan garis meliuk atau ombak bergelombang yang dinamis dan lembut, seperti deburan ombak laut atau kobaran lidah api.')" class="w-full py-2 bg-cyan-100 hover:bg-cyan-200 text-cyan-900 font-bold rounded-xl text-xs transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-volume-high"></i> Pelajari Pola 4 🎙️
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="content-unsur" class="tab-content space-y-6 hidden">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100 space-y-8">
+        
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="px-3 py-1 bg-pink-100 text-pink-800 text-xs font-bold rounded-full uppercase tracking-wider">
+            Bahan Baku Karya Seni
+          </span>
+          <h3 class="font-fun text-2xl sm:text-3xl font-bold text-slate-800">
+            Lima Unsur Seni Rupa yang Membentuk Ritme
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-500">
+            Ritme dapat diciptakan menggunakan unsur seni rupa apa saja! Mari kita pelajari bagaimana <strong>Titik, Garis, Bidang, Bentuk (3D), dan Warna</strong> dapat disusun menjadi irama indah.
+          </p>
+        </div>
+
+        <!-- 5 Elements Interactive Grid Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Element 1: Unsur Titik (Dot/Point) -->
+          <div class="p-6 rounded-3xl bg-purple-50/80 border-2 border-purple-200 card-zoom space-y-4 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="w-12 h-12 rounded-2xl bg-purple-600 text-white flex items-center justify-center text-xl shadow-md font-bold">
+                  ●
+                </span>
+                <span class="px-3 py-1 bg-purple-200 text-purple-900 font-bold text-xs rounded-full">Unsur 1</span>
+              </div>
+              <h4 class="font-fun text-xl font-bold text-slate-800">1. Unsur Titik (*Point / Dot*)</h4>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Titik adalah unsur seni rupa paling mendasar dan paling kecil. Ketika titik-titik diulang dengan kerapatan berbeda atau ukuran yang membesar/mengecil, terciptalah irama titik (*stippling rhythm*).
+              </p>
+
+              <!-- SVG Visual Demo of Dot Rhythm -->
+              <div class="p-3 bg-white rounded-2xl border border-purple-200 space-y-1 text-xs">
+                <span class="font-bold text-purple-900 block font-fun">Contoh Visual Ritme Titik:</span>
+                <svg viewBox="0 0 240 60" class="w-full h-12 bg-purple-50/50 rounded-xl p-1">
+                  <!-- Gradation of Dots -->
+                  <circle cx="20" cy="30" r="2.5" fill="#7c3aed" />
+                  <circle cx="45" cy="30" r="4" fill="#7c3aed" />
+                  <circle cx="75" cy="30" r="6" fill="#7c3aed" />
+                  <circle cx="110" cy="30" r="8.5" fill="#7c3aed" />
+                  <circle cx="150" cy="30" r="11" fill="#7c3aed" />
+                  <circle cx="195" cy="30" r="14" fill="#7c3aed" />
+                </svg>
+                <p class="text-[11px] text-slate-500 italic">Contoh: Pola *Polka-dot*, motif noktah batik, dan teknik arsiran titik rapat-renggang.</p>
+              </div>
+            </div>
+
+            <button onclick="speakIndoText('Unsur Titik dalam ritme: Titik adalah unsur paling dasar. Pengulangan titik dari kecil ke besar atau dari renggang ke rapat menciptakan irama gradasi titik yang dinamis.')" class="w-full py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-sm">
+              <i class="fa-solid fa-volume-high"></i> Dengarkan Titik 🎙️
+            </button>
+          </div>
+
+          <!-- Element 2: Unsur Garis (Line) -->
+          <div class="p-6 rounded-3xl bg-pink-50/80 border-2 border-pink-200 card-zoom space-y-4 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="w-12 h-12 rounded-2xl bg-pink-600 text-white flex items-center justify-center text-xl shadow-md font-bold">
+                  〰️
+                </span>
+                <span class="px-3 py-1 bg-pink-200 text-pink-900 font-bold text-xs rounded-full">Unsur 2</span>
+              </div>
+              <h4 class="font-fun text-xl font-bold text-slate-800">2. Unsur Garis (*Line*)</h4>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Garis terbentuk dari jejak titik yang memanjang. Ritme garis dihasilkan dari pengulangan garis lurus, zig-zag, garis tebal-tipis, atau garis lengkung bergelombang secara berirama.
+              </p>
+
+              <!-- SVG Visual Demo of Line Rhythm -->
+              <div class="p-3 bg-white rounded-2xl border border-pink-200 space-y-1 text-xs">
+                <span class="font-bold text-pink-900 block font-fun">Contoh Visual Ritme Garis:</span>
+                <svg viewBox="0 0 240 60" class="w-full h-12 bg-pink-50/50 rounded-xl p-1">
+                  <!-- Rhythm of Wavy Lines -->
+                  <path d="M 10 30 Q 35 10, 60 30 T 110 30 T 160 30 T 210 30" fill="none" stroke="#ec4899" stroke-width="3" stroke-linecap="round" />
+                  <path d="M 10 40 Q 35 20, 60 40 T 110 40 T 160 40 T 210 40" fill="none" stroke="#f43f5e" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+                <p class="text-[11px] text-slate-500 italic">Contoh: Garis belang kulit zebra, riak air danau, serta garis teralis pagar.</p>
+              </div>
+            </div>
+
+            <button onclick="speakIndoText('Unsur Garis dalam ritme: Pengulangan garis sejajar, garis zig-zag, atau garis bergelombang meliuk menghasilkan ilusi gerak dan aliran yang sangat ekspresif.')" class="w-full py-2 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-sm">
+              <i class="fa-solid fa-volume-high"></i> Dengarkan Garis 🎙️
+            </button>
+          </div>
+
+          <!-- Element 3: Unsur Bidang (2D Shape) -->
+          <div class="p-6 rounded-3xl bg-amber-50/80 border-2 border-amber-200 card-zoom space-y-4 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-xl shadow-md font-bold">
+                  ⬛
+                </span>
+                <span class="px-3 py-1 bg-amber-200 text-amber-900 font-bold text-xs rounded-full">Unsur 3</span>
+              </div>
+              <h4 class="font-fun text-xl font-bold text-slate-800">3. Unsur Bidang (*Shape / Plane*)</h4>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Bidang adalah area dua dimensi yang dibatasi oleh garis (memiliki panjang dan lebar). Ritme bidang tercipta dari susunan berulang bentuk lingkaran, persegi, belah ketupat, atau segitiga.
+              </p>
+
+              <!-- SVG Visual Demo of Shape Rhythm -->
+              <div class="p-3 bg-white rounded-2xl border border-amber-200 space-y-1 text-xs">
+                <span class="font-bold text-amber-900 block font-fun">Contoh Visual Ritme Bidang:</span>
+                <svg viewBox="0 0 240 60" class="w-full h-12 bg-amber-50/50 rounded-xl p-1">
+                  <!-- Repeating Diamonds & Circles -->
+                  <polygon points="25,30 40,15 55,30 40,45" fill="#f59e0b" />
+                  <circle cx="80" cy="30" r="12" fill="#d97706" />
+                  <polygon points="115,30 130,15 145,30 130,45" fill="#f59e0b" />
+                  <circle cx="170" cy="30" r="12" fill="#d97706" />
+                  <polygon points="205,30 220,15 235,30 220,45" fill="#f59e0b" />
+                </svg>
+                <p class="text-[11px] text-slate-500 italic">Contoh: Pola motif ornamen ubin keramik, motif batik Kawung, dan mozaik lantai.</p>
+              </div>
+            </div>
+
+            <button onclick="speakIndoText('Unsur Bidang dalam ritme: Pengulangan bidang dua dimensi seperti lingkaran dan segitiga yang disusun berselingan menghasilkan ornamen motif geometris yang rapi.')" class="w-full py-2 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-sm">
+              <i class="fa-solid fa-volume-high"></i> Dengarkan Bidang 🎙️
+            </button>
+          </div>
+
+          <!-- Element 4: Unsur Bentuk (3D Form) -->
+          <div class="p-6 rounded-3xl bg-cyan-50/80 border-2 border-cyan-200 card-zoom space-y-4 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="w-12 h-12 rounded-2xl bg-cyan-600 text-white flex items-center justify-center text-xl shadow-md font-bold">
+                  🧊
+                </span>
+                <span class="px-3 py-1 bg-cyan-200 text-cyan-900 font-bold text-xs rounded-full">Unsur 4</span>
+              </div>
+              <h4 class="font-fun text-xl font-bold text-slate-800">4. Unsur Bentuk (*3D Form*)</h4>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Bentuk memiliki volume, ruang, dan kedalaman tiga dimensi (kubus, balok, kerucut, bola). Ritme bentuk dapat dilihat pada susunan balok bertingkat atau patung yang berjejer teratur.
+              </p>
+
+              <!-- SVG Visual Demo of 3D Form Rhythm -->
+              <div class="p-3 bg-white rounded-2xl border border-cyan-200 space-y-1 text-xs">
+                <span class="font-bold text-cyan-900 block font-fun">Contoh Visual Ritme Bentuk 3D:</span>
+                <svg viewBox="0 0 240 60" class="w-full h-12 bg-cyan-50/50 rounded-xl p-1">
+                  <!-- Stepping Cubes in isometric simulation -->
+                  <rect x="20" y="32" width="18" height="18" fill="#06b6d4" rx="2" />
+                  <rect x="65" y="24" width="24" height="26" fill="#0891b2" rx="2" />
+                  <rect x="120" y="16" width="30" height="34" fill="#0e7490" rx="3" />
+                  <rect x="185" y="8" width="36" height="42" fill="#155e75" rx="3" />
+                </svg>
+                <p class="text-[11px] text-slate-500 italic">Contoh: Deretan pilar candi, anak tangga berundak, dan susunan piramida bertingkat.</p>
+              </div>
+            </div>
+
+            <button onclick="speakIndoText('Unsur Bentuk tiga dimensi dalam ritme: Susunan bentuk bervolume seperti kubus bertingkat atau tiang pilar bangunan menciptakan kedalaman ruang dan ketertiban arsitektur.')" class="w-full py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-sm">
+              <i class="fa-solid fa-volume-high"></i> Dengarkan Bentuk 🎙️
+            </button>
+          </div>
+
+          <!-- Element 5: Unsur Warna (Color) -->
+          <div class="p-6 rounded-3xl bg-emerald-50/80 border-2 border-emerald-200 card-zoom space-y-4 flex flex-col justify-between md:col-span-2 lg:col-span-2">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-xl shadow-md font-bold">
+                  🌈
+                </span>
+                <span class="px-3 py-1 bg-emerald-200 text-emerald-900 font-bold text-xs rounded-full">Unsur 5</span>
+              </div>
+              <h4 class="font-fun text-xl font-bold text-slate-800">5. Unsur Warna (*Color Rhythm*)</h4>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Warna mampu menghidupkan suasana emosional karya. Ritme warna dapat dibentuk melalui <strong>gradasi warna sejuk ke hangat</strong>, pengulangan spektrum warna pelangi, atau pergantian warna komplementer (kontras) yang selang-seling.
+              </p>
+
+              <!-- SVG Visual Demo of Color Rhythm -->
+              <div class="p-3 bg-white rounded-2xl border border-emerald-200 space-y-1 text-xs">
+                <span class="font-bold text-emerald-900 block font-fun">Contoh Visual Ritme Gradasi Warna:</span>
+                <div class="h-10 rounded-xl overflow-hidden flex shadow-inner border border-emerald-300">
+                  <div class="flex-1 bg-red-500 flex items-center justify-center text-[10px] text-white font-bold">Merah</div>
+                  <div class="flex-1 bg-orange-500 flex items-center justify-center text-[10px] text-white font-bold">Jingga</div>
+                  <div class="flex-1 bg-amber-400 flex items-center justify-center text-[10px] text-slate-900 font-bold">Kuning</div>
+                  <div class="flex-1 bg-emerald-500 flex items-center justify-center text-[10px] text-white font-bold">Hijau</div>
+                  <div class="flex-1 bg-sky-500 flex items-center justify-center text-[10px] text-white font-bold">Biru</div>
+                  <div class="flex-1 bg-purple-600 flex items-center justify-center text-[10px] text-white font-bold">Ungu</div>
+                </div>
+                <p class="text-[11px] text-slate-500 italic">Contoh: Pemandangan langit senja (gradasi kuning-oranye-ungu) dan motif pelangi.</p>
+              </div>
+            </div>
+
+            <button onclick="speakIndoText('Unsur Warna dalam ritme: Melibatkan penyusunan transisi warna hangat ke warna dingin atau pengulangan warna pelangi berurutan, sehingga lukisan terasa bernuansa ceria dan harmonis.')" class="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-sm">
+              <i class="fa-solid fa-volume-high"></i> Dengarkan Warna 🎙️
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="content-simulator" class="tab-content space-y-6 hidden">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100 space-y-6">
+        
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full uppercase tracking-wider">
+            Eksperimen Mandiri
+          </span>
+          <h3 class="font-fun text-2xl sm:text-3xl font-bold text-slate-800">
+            Laboratorium Generator Pola Ritme Visual 🧪
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-500">
+            Ubah jenis unsur dan tipe ritme di bawah ini untuk melihat bagaimana pola visual terbuat secara langsung di layar monitor seni!
+          </p>
+        </div>
+
+        <!-- Simulator Controls Panel -->
+        <div class="p-6 rounded-3xl bg-slate-900 text-white space-y-6 shadow-xl border border-slate-800">
+          
+          <!-- Element & Pattern Pickers -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <div class="space-y-2">
+              <label class="text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-shapes"></i> 1. Pilih Unsur Seni Rupa:
+              </label>
+              <div class="flex flex-wrap gap-2">
+                <button id="btn-elem-titik" onclick="setLabElement('titik')" class="lab-elem-btn px-3 py-2 rounded-xl bg-purple-600 text-white text-xs font-bold shadow-xs transition">
+                  ● Titik
+                </button>
+                <button id="btn-elem-garis" onclick="setLabElement('garis')" class="lab-elem-btn px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+                  〰️ Garis
+                </button>
+                <button id="btn-elem-bidang" onclick="setLabElement('bidang')" class="lab-elem-btn px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+                  ⬛ Bidang
+                </button>
+                <button id="btn-elem-warna" onclick="setLabElement('warna')" class="lab-elem-btn px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+                  🌈 Warna
+                </button>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label class="text-xs font-bold text-pink-300 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-sliders"></i> 2. Pilih Tipe Ritme:
+              </label>
+              <div class="flex flex-wrap gap-2">
+                <button id="btn-rhythm-teratur" onclick="setLabRhythm('teratur')" class="lab-rhythm-btn px-3 py-2 rounded-xl bg-pink-600 text-white text-xs font-bold shadow-xs transition">
+                  Teratur (Repetisi)
+                </button>
+                <button id="btn-rhythm-alternasi" onclick="setLabRhythm('alternasi')" class="lab-rhythm-btn px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+                  Selang-Seling (Alternasi)
+                </button>
+                <button id="btn-rhythm-progresi" onclick="setLabRhythm('progresi')" class="lab-rhythm-btn px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+                  Gradasi (Progresi)
+                </button>
+                <button id="btn-rhythm-mengalir" onclick="setLabRhythm('mengalir')" class="lab-rhythm-btn px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+                  Mengalir (Flowing)
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Dynamic Visual Canvas Display -->
+          <div class="p-6 rounded-2xl bg-slate-950 border border-slate-700 relative overflow-hidden min-h-[180px] flex items-center justify-center shadow-inner">
+            <div id="labPatternDisplay" class="w-full flex items-center justify-center flex-wrap gap-3 sm:gap-4 py-4 transition-all">
+              <!-- Dynamically populated by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Explanation Card on Current Simulation -->
+          <div class="p-4 rounded-2xl bg-white/10 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div class="space-y-1 text-center sm:text-left">
+              <span class="text-amber-300 font-bold block" id="labResultTitle">Analisis Ritme: Titik dengan Pola Teratur</span>
+              <p class="text-slate-200" id="labResultDesc">
+                Titik-titik berukuran sama disusun dengan jarak seragam menghasilkan ketertiban visual yang rapi dan konsisten.
+              </p>
+            </div>
+            <button onclick="speakLabExplanation()" class="shrink-0 px-3 py-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 rounded-xl font-bold transition flex items-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-volume-high"></i> Suarakan Analisis 🎙️
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="content-budaya" class="tab-content space-y-6 hidden">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100 space-y-8">
+        
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full uppercase tracking-wider">
+            Apresiasi Seni Tradisi
+          </span>
+          <h3 class="font-fun text-2xl sm:text-3xl font-bold text-slate-800">
+            Kekayaan Ritme pada Batik Nusantara & Alam Semesta
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-500">
+            Nenek moyang bangsa Indonesia adalah maestro ritme seni rupa! Sejak ratusan tahun lalu, prinsip ritme telah diterapkan pada kain batik, ukiran kayu, dan relief candi.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Heritage 1: Batik Kawung -->
+          <div class="p-6 rounded-3xl bg-amber-50/70 border-2 border-amber-200 card-zoom space-y-3 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="w-12 h-12 rounded-2xl bg-amber-600 text-white flex items-center justify-center text-xl shadow-md">
+                <i class="fa-solid fa-clover"></i>
+              </div>
+              <h4 class="font-fun text-xl font-bold text-slate-800">1. Motif Batik Kawung</h4>
+              <span class="text-xs font-bold text-amber-800 bg-amber-200 px-2.5 py-0.5 rounded-full inline-block">Ritme Bidang Alternasi Teratur</span>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Batik Kawung tersusun dari 4 lingkaran/lonjong elips yang menyerupai buah kolang-kaling yang dibelah. Keempat elips ini mengelilingi satu titik pusat dan diulang bersambungan secara rapi.
+              </p>
+
+              <div class="p-3 bg-white rounded-xl border border-amber-200 text-xs text-slate-700">
+                <strong class="text-amber-900 block mb-1">Filosofi Seni:</strong>
+                Melambangkan kesucian hati, ketertiban, keadilan, dan keseimbangan hidup manusia dengan alam.
+              </div>
+            </div>
+
+            <button onclick="speakIndoText('Batik Kawung menerapkan ritme bidang elips yang diulang teratur mengelilingi satu poros, melambangkan ketertiban, keadilan, dan keseimbangan hidup.')" class="w-full py-2 bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold rounded-xl text-xs transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-volume-high"></i> Pelajari Kawung 🎙️
+            </button>
+          </div>
+
+          <!-- Heritage 2: Batik Megamendung -->
+          <div class="p-6 rounded-3xl bg-sky-50/70 border-2 border-sky-200 card-zoom space-y-3 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="w-12 h-12 rounded-2xl bg-sky-600 text-white flex items-center justify-center text-xl shadow-md">
+                <i class="fa-solid fa-cloud"></i>
+              </div>
+              <h4 class="font-fun text-xl font-bold text-slate-800">2. Motif Batik Megamendung</h4>
+              <span class="text-xs font-bold text-sky-800 bg-sky-200 px-2.5 py-0.5 rounded-full inline-block">Ritme Garis Meliuk & Gradasi Warna</span>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Berasal dari Cirebon, motif awan pembawa hujan ini memadukan ritme <strong>garis lengkung mengalir</strong> dengan <strong>gradasi tingkatan warna</strong> (dari biru tua, biru sedang, biru muda, hingga putih).
+              </p>
+
+              <div class="p-3 bg-white rounded-xl border border-sky-200 text-xs text-slate-700">
+                <strong class="text-sky-900 block mb-1">Filosofi Seni:</strong>
+                Awan sejuk yang meneduhkan dan mengajarkan manusia untuk selalu sabar, tidak mudah marah, serta berhati dingin.
+              </div>
+            </div>
+
+            <button onclick="speakIndoText('Batik Megamendung dari Cirebon memadukan ritme garis awan meliuk dinamis dengan tingkatan gradasi warna biru yang meneduhkan.')" class="w-full py-2 bg-sky-100 hover:bg-sky-200 text-sky-900 font-bold rounded-xl text-xs transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-volume-high"></i> Pelajari Megamendung 🎙️
+            </button>
+          </div>
+
+          <!-- Heritage 3: Batik Parang Rusak -->
+          <div class="p-6 rounded-3xl bg-purple-50/70 border-2 border-purple-200 card-zoom space-y-3 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="w-12 h-12 rounded-2xl bg-purple-600 text-white flex items-center justify-center text-xl shadow-md">
+                <i class="fa-solid fa-water"></i>
+              </div>
+              <h4 class="font-fun text-xl font-bold text-slate-800">3. Motif Batik Parang</h4>
+              <span class="text-xs font-bold text-purple-800 bg-purple-200 px-2.5 py-0.5 rounded-full inline-block">Ritme Diagonal & Gelombang Ombak</span>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Motif parang menyerupai huruf 'S' yang tersusun miring diagonal berkesinambungan. Terinspirasi dari deburan ombak laut selatan yang menerjang karang tanpa pernah lelah.
+              </p>
+
+              <div class="p-3 bg-white rounded-xl border border-purple-200 text-xs text-slate-700">
+                <strong class="text-purple-900 block mb-1">Filosofi Seni:</strong>
+                Semangat pantang menyerah, kegigihan ksatria, dan jalinan ikatan silaturahmi yang tidak pernah terputus.
+              </div>
+            </div>
+
+            <button onclick="speakIndoText('Batik Parang menampilkan susunan garis diagonal menyerupai ombak samudra yang terus bergerak berulang, melambangkan kegigihan dan semangat pantang menyerah.')" class="w-full py-2 bg-purple-100 hover:bg-purple-200 text-purple-900 font-bold rounded-xl text-xs transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-volume-high"></i> Pelajari Parang 🎙️
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="content-kanvas" class="tab-content space-y-6 hidden">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100 space-y-6">
+        
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="px-3 py-1 bg-pink-100 text-pink-800 text-xs font-bold rounded-full uppercase tracking-wider">
+            Aktivitas Praktik Seni
+          </span>
+          <h3 class="font-fun text-2xl sm:text-3xl font-bold text-slate-800">
+            Studio Kanvas Pelukis Cilik 🖌️
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-500">
+            Pilih kuas ritme (titik berulang, garis ombak, atau stempel bidang geometris) dan mulailah menggambar irama karyamu sendiri di atas kanvas!
+          </p>
+        </div>
+
+        <!-- Canvas Toolkit & Drawing Board -->
+        <div class="p-6 rounded-3xl bg-slate-900 text-white space-y-4 shadow-xl border border-slate-800">
+          
+          <!-- Drawing Toolbar Controls -->
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-700 pb-3">
+            
+            <!-- Tool type selector -->
+            <div class="flex items-center gap-1.5">
+              <button id="tool-brush" onclick="setCanvasTool('brush')" class="px-3 py-1.5 rounded-xl bg-purple-600 text-white font-bold text-xs shadow-xs transition">
+                <i class="fa-solid fa-pencil mr-1"></i> Kuas Garis
+              </button>
+              <button id="tool-dots" onclick="setCanvasTool('dots')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition">
+                <i class="fa-solid fa-braille mr-1"></i> Irama Titik
+              </button>
+              <button id="tool-wave" onclick="setCanvasTool('wave')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition">
+                <i class="fa-solid fa-water mr-1"></i> Garis Ombak
+              </button>
+              <button id="tool-stamp" onclick="setCanvasTool('stamp')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition">
+                <i class="fa-solid fa-shapes mr-1"></i> Stempel Bidang
+              </button>
+            </div>
+
+            <!-- Color Palette Selector -->
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-slate-400">Warna:</span>
+              <button onclick="setCanvasColor('#7c3aed')" class="w-6 h-6 rounded-full bg-purple-600 border-2 border-white shadow-xs"></button>
+              <button onclick="setCanvasColor('#ec4899')" class="w-6 h-6 rounded-full bg-pink-500 border-2 border-white shadow-xs"></button>
+              <button onclick="setCanvasColor('#f59e0b')" class="w-6 h-6 rounded-full bg-amber-500 border-2 border-white shadow-xs"></button>
+              <button onclick="setCanvasColor('#06b6d4')" class="w-6 h-6 rounded-full bg-cyan-400 border-2 border-white shadow-xs"></button>
+              <button onclick="setCanvasColor('#10b981')" class="w-6 h-6 rounded-full bg-emerald-500 border-2 border-white shadow-xs"></button>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="flex items-center gap-2">
+              <button onclick="clearCanvasStudio()" class="px-3 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition flex items-center gap-1">
+                <i class="fa-solid fa-trash"></i> Bersihkan Kanvas
+              </button>
+            </div>
+
+          </div>
+
+          <!-- HTML5 Canvas Element -->
+          <div class="w-full bg-white rounded-2xl overflow-hidden shadow-inner cursor-crosshair relative">
+            <canvas id="artCanvas" class="w-full h-72 sm:h-96 block touch-none"></canvas>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 pt-1 gap-2">
+            <span><i class="fa-solid fa-circle-info text-amber-400 mr-1"></i> Klik dan seret tetikus/jari pada layar sentuh untuk melukis irama titik dan garis berulang.</span>
+            <span class="text-emerald-400 font-semibold">Ciptakan ritme teratur atau ritme mengalir sesuai kreasimu!</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="content-kuis" class="tab-content space-y-6 hidden">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100 space-y-6">
+        
+        <!-- Quiz Header Info -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-100 pb-6">
+          <div>
+            <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full uppercase tracking-wider">
+              Asesmen Formatif SBdP
+            </span>
+            <h3 class="font-fun text-2xl sm:text-3xl font-bold text-slate-800 mt-1">
+              Tantangan Juara Pelukis Cilik Ritme 🏆
+            </h3>
+          </div>
+          <div class="flex items-center gap-3 bg-slate-50 px-4 py-2.5 rounded-2xl border border-slate-200 shadow-xs">
+            <div class="text-right">
+              <span class="text-[11px] text-slate-400 font-bold uppercase block">Skor Kamu</span>
+              <span id="quizScoreDisplay" class="font-fun text-2xl font-bold text-purple-600">0 / 6</span>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-amber-400 text-slate-900 flex items-center justify-center text-xl font-bold shadow-sm">
+              <i class="fa-solid fa-trophy"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quiz Container Box -->
+        <div id="quizContainer" class="space-y-6 max-w-3xl mx-auto">
+          
+          <!-- Progress Bar & Counter -->
+          <div class="flex items-center justify-between text-xs text-slate-500 font-semibold">
+            <span id="quizQuestionCount">Pertanyaan 1 dari 6</span>
+            <div class="w-40 sm:w-56 bg-slate-200 rounded-full h-2.5 overflow-hidden">
+              <div id="quizProgressBar" class="bg-purple-600 h-2.5 transition-all duration-300" style="width: 16.6%"></div>
+            </div>
+          </div>
+
+          <!-- Question Box with Audio Speak -->
+          <div class="p-5 bg-purple-50/80 border-2 border-purple-200 rounded-2xl space-y-3">
+            <div class="flex items-start justify-between gap-3">
+              <h4 id="quizQuestionText" class="font-fun text-lg sm:text-xl font-bold text-slate-800 leading-snug">
+                Memuat pertanyaan kuis...
+              </h4>
+              <button id="quizSpeakQuestionBtn" onclick="speakCurrentQuestion()" class="shrink-0 p-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700 transition" title="Dengarkan Soal">
+                <i class="fa-solid fa-volume-high text-sm"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Option Buttons Grid -->
+          <div id="quizOptionsGrid" class="grid grid-cols-1 gap-3">
+            <!-- Options dynamically rendered by JavaScript -->
+          </div>
+
+          <!-- Explanation Feedback Box -->
+          <div id="quizFeedbackBox" class="hidden p-4 rounded-2xl text-xs sm:text-sm"></div>
+
+          <!-- Next Action Button -->
+          <div class="flex justify-end pt-2">
+            <button id="quizNextBtn" onclick="nextQuizQuestion()" disabled class="px-6 py-3 rounded-2xl bg-slate-200 text-slate-400 font-bold text-xs sm:text-sm cursor-not-allowed transition flex items-center gap-2">
+              Lanjut Soal Berikutnya <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz Final Result Modal / Box -->
+        <div id="quizResultBox" class="hidden text-center max-w-xl mx-auto space-y-5 p-8 rounded-3xl bg-gradient-to-b from-purple-50 via-pink-50 to-white border-2 border-purple-200 shadow-md">
+          <div class="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-amber-400 to-yellow-300 text-slate-900 flex items-center justify-center text-4xl shadow-lg animate-bounce-soft">
+            <i class="fa-solid fa-palette"></i>
+          </div>
+          <h4 class="font-fun text-2xl sm:text-3xl font-bold text-slate-800">Luar Biasa! Kamu Seniman Cilik Hebat!</h4>
+          <p id="quizFinalFeedback" class="text-xs sm:text-sm text-slate-600 leading-relaxed"></p>
+          <div class="p-4 rounded-2xl bg-purple-100 text-purple-950 font-fun text-xl font-bold">
+            Total Skor Kamu: <span id="quizFinalScore">0</span> / 6
+          </div>
+          <button onclick="restartQuiz()" class="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-bold px-6 py-3 rounded-2xl shadow-md transition text-xs sm:text-sm">
+            <i class="fa-solid fa-rotate-left"></i> Ulangi Kuis Lagi
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-slate-900 text-slate-400 text-xs sm:text-sm py-8 border-t border-slate-800 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3 text-white">
+        <div class="w-8 h-8 rounded-xl bg-purple-600 flex items-center justify-center text-white">
+          <i class="fa-solid fa-paintbrush"></i>
+        </div>
+        <span class="font-fun font-bold text-base">Modul Interaktif SBdP Kelas 6 SD • Menggambar Prinsip Ritme</span>
+      </div>
+      <p class="text-center sm:text-right">
+        Dirancang edukatif, estetik, ramah anak, dan selaras dengan Capaian Pembelajaran Seni Rupa Sekolah Dasar.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    /* ================= TAB NAVIGATION ================= */
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+      const targetContent = document.getElementById('content-' + tabId);
+      if (targetContent) targetContent.classList.remove('hidden');
+
+      const targetBtn = document.getElementById('tab-' + tabId);
+      if (targetBtn) targetBtn.classList.add('active');
+
+      if (tabId === 'kanvas') {
+        setTimeout(resizeCanvas, 150);
+      }
+
+      window.scrollTo({ top: 120, behavior: 'smooth' });
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    /* ================= WEB SPEECH API (BAHASA INDONESIA) ================= */
+    let audioRate = 1.0;
+
+    function setAudioSpeed(speed) {
+      audioRate = speed;
+      const normalBtn = document.getElementById('audioNormalBtn');
+      const slowBtn = document.getElementById('audioSlowBtn');
+
+      if (speed >= 0.9) {
+        normalBtn.className = "px-2 py-1 rounded-lg bg-white text-purple-700 shadow-xs font-bold";
+        slowBtn.className = "px-2 py-1 rounded-lg text-purple-900 hover:bg-white/80";
+      } else {
+        slowBtn.className = "px-2 py-1 rounded-lg bg-white text-purple-700 shadow-xs font-bold";
+        normalBtn.className = "px-2 py-1 rounded-lg text-purple-900 hover:bg-white/80";
+      }
+    }
+
+    function speakIndoText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'id-ID';
+        utterance.rate = audioRate;
+        utterance.pitch = 1.05;
+
+        const voices = window.speechSynthesis.getVoices();
+        const idVoice = voices.find(v => v.lang === 'id-ID' || v.lang.startsWith('id'));
+        if (idVoice) utterance.voice = idVoice;
+
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
+
+    /* ================= TONE.JS AUDIO SYNTHESIZERS ================= */
+    let toneSynth = null;
+
+    function initToneSynths() {
+      if (!toneSynth && window.Tone) {
+        try {
+          toneSynth = new Tone.PolySynth(Tone.Synth).toDestination();
+          toneSynth.volume.value = -10;
+        } catch (e) {}
+      }
+    }
+
+    function playMelodyTone() {
+      try {
+        if (window.Tone && Tone.context.state !== 'running') Tone.start();
+        initToneSynths();
+        if (toneSynth) {
+          const now = Tone.now();
+          // C-E-G-C musical rhythm
+          toneSynth.triggerAttackRelease("C4", "8n", now);
+          toneSynth.triggerAttackRelease("E4", "8n", now + 0.12);
+          toneSynth.triggerAttackRelease("G4", "8n", now + 0.24);
+          toneSynth.triggerAttackRelease("C5", "4n", now + 0.36);
+        }
+      } catch (e) {}
+    }
+
+    function playSuccessTone() {
+      try {
+        if (window.Tone && Tone.context.state !== 'running') Tone.start();
+        initToneSynths();
+        if (toneSynth) {
+          const now = Tone.now();
+          toneSynth.triggerAttackRelease("G4", "8n", now);
+          toneSynth.triggerAttackRelease("C5", "8n", now + 0.1);
+          toneSynth.triggerAttackRelease("E5", "4n", now + 0.2);
+        }
+      } catch (e) {}
+    }
+
+    function playWrongTone() {
+      try {
+        if (window.Tone && Tone.context.state !== 'running') Tone.start();
+        initToneSynths();
+        if (toneSynth) {
+          const now = Tone.now();
+          toneSynth.triggerAttackRelease("F4", "8n", now);
+          toneSynth.triggerAttackRelease("C#4", "4n", now + 0.15);
+        }
+      } catch (e) {}
+    }
+
+    function playTadaTone() {
+      try {
+        if (window.Tone && Tone.context.state !== 'running') Tone.start();
+        initToneSynths();
+        if (toneSynth) {
+          const now = Tone.now();
+          toneSynth.triggerAttackRelease("C5", "8n", now);
+          toneSynth.triggerAttackRelease("E5", "8n", now + 0.1);
+          toneSynth.triggerAttackRelease("G5", "8n", now + 0.2);
+          toneSynth.triggerAttackRelease("C6", "2n", now + 0.3);
+        }
+      } catch (e) {}
+    }
+
+    /* ================= VISUAL RHYTHM SIMULATOR LAB ================= */
+    let selectedLabElement = 'titik';
+    let selectedLabRhythm = 'teratur';
+
+    const labDataMatrix = {
+      'titik-teratur': {
+        title: 'Ritme Titik: Pola Teratur (Repetisi)',
+        desc: 'Titik-titik berukuran sama disusun dengan jarak seragam menghasilkan ketertiban visual yang rapi dan konsisten.',
+        html: `
+          <div class="flex items-center gap-6">
+            <div class="w-6 h-6 rounded-full bg-purple-500 shadow-md"></div>
+            <div class="w-6 h-6 rounded-full bg-purple-500 shadow-md"></div>
+            <div class="w-6 h-6 rounded-full bg-purple-500 shadow-md"></div>
+            <div class="w-6 h-6 rounded-full bg-purple-500 shadow-md"></div>
+            <div class="w-6 h-6 rounded-full bg-purple-500 shadow-md"></div>
+          </div>
+        `
+      },
+      'titik-alternasi': {
+        title: 'Ritme Titik: Pola Alternasi (Selang-Seling)',
+        desc: 'Titik besar dan titik kecil disusun bergantian secara teratur menciptakan irama detak yang dinamis.',
+        html: `
+          <div class="flex items-center gap-4">
+            <div class="w-8 h-8 rounded-full bg-purple-500 shadow-md"></div>
+            <div class="w-3 h-3 rounded-full bg-pink-400 shadow-xs"></div>
+            <div class="w-8 h-8 rounded-full bg-purple-500 shadow-md"></div>
+            <div class="w-3 h-3 rounded-full bg-pink-400 shadow-xs"></div>
+            <div class="w-8 h-8 rounded-full bg-purple-500 shadow-md"></div>
+            <div class="w-3 h-3 rounded-full bg-pink-400 shadow-xs"></div>
+          </div>
+        `
+      },
+      'titik-progresi': {
+        title: 'Ritme Titik: Pola Progresi (Gradasi Ukuran)',
+        desc: 'Titik bertambah besar secara berangsur-angsur dari kiri ke kanan, memberikan kesan mendekat atau membesar.',
+        html: `
+          <div class="flex items-center gap-4">
+            <div class="w-3 h-3 rounded-full bg-purple-400"></div>
+            <div class="w-5 h-5 rounded-full bg-purple-500"></div>
+            <div class="w-8 h-8 rounded-full bg-purple-600"></div>
+            <div class="w-12 h-12 rounded-full bg-pink-500 shadow-md"></div>
+            <div class="w-16 h-16 rounded-full bg-amber-400 shadow-lg"></div>
+          </div>
+        `
+      },
+      'titik-mengalir': {
+        title: 'Ritme Titik: Pola Mengalir (Flowing Path)',
+        desc: 'Titik-titik berbaris membentuk alur meliuk gelombang yang lembut seakan terbang tertiup angin.',
+        html: `
+          <svg viewBox="0 0 320 80" class="w-full max-w-md h-20">
+            <circle cx="20" cy="40" r="5" fill="#ec4899" />
+            <circle cx="50" cy="25" r="6" fill="#ec4899" />
+            <circle cx="80" cy="18" r="7" fill="#ec4899" />
+            <circle cx="110" cy="25" r="6" fill="#ec4899" />
+            <circle cx="140" cy="45" r="7" fill="#7c3aed" />
+            <circle cx="170" cy="60" r="8" fill="#7c3aed" />
+            <circle cx="200" cy="65" r="9" fill="#7c3aed" />
+            <circle cx="230" cy="55" r="8" fill="#06b6d4" />
+            <circle cx="260" cy="35" r="7" fill="#06b6d4" />
+            <circle cx="290" cy="25" r="6" fill="#06b6d4" />
+          </svg>
+        `
+      },
+      'garis-teratur': {
+        title: 'Ritme Garis: Pola Teratur (Garis Sejajar)',
+        desc: 'Garis-garis lurus berdiri vertikal dengan ketebalan dan jarak sama persis menghasilkan kesan kokoh teratur.',
+        html: `
+          <div class="flex items-center gap-4">
+            <div class="w-2 h-20 bg-cyan-400 rounded-full"></div>
+            <div class="w-2 h-20 bg-cyan-400 rounded-full"></div>
+            <div class="w-2 h-20 bg-cyan-400 rounded-full"></div>
+            <div class="w-2 h-20 bg-cyan-400 rounded-full"></div>
+            <div class="w-2 h-20 bg-cyan-400 rounded-full"></div>
+            <div class="w-2 h-20 bg-cyan-400 rounded-full"></div>
+          </div>
+        `
+      },
+      'garis-alternasi': {
+        title: 'Ritme Garis: Pola Alternasi (Tebal - Tipis)',
+        desc: 'Pengulangan selang-seling antara garis tebal yang dominan dengan garis tipis yang halus.',
+        html: `
+          <div class="flex items-center gap-3">
+            <div class="w-4 h-20 bg-purple-500 rounded-full"></div>
+            <div class="w-1 h-20 bg-pink-400 rounded-full"></div>
+            <div class="w-4 h-20 bg-purple-500 rounded-full"></div>
+            <div class="w-1 h-20 bg-pink-400 rounded-full"></div>
+            <div class="w-4 h-20 bg-purple-500 rounded-full"></div>
+            <div class="w-1 h-20 bg-pink-400 rounded-full"></div>
+          </div>
+        `
+      },
+      'garis-progresi': {
+        title: 'Ritme Garis: Pola Progresi (Tinggi Bertingkat)',
+        desc: 'Tinggi garis bertambah tinggi secara berurutan menyerupai tangga nada visual atau equalizer musik.',
+        html: `
+          <div class="flex items-end gap-3 h-24">
+            <div class="w-3 h-6 bg-amber-400 rounded-t-lg"></div>
+            <div class="w-3 h-10 bg-amber-400 rounded-t-lg"></div>
+            <div class="w-3 h-14 bg-amber-500 rounded-t-lg"></div>
+            <div class="w-3 h-18 bg-pink-500 rounded-t-lg"></div>
+            <div class="w-3 h-22 bg-purple-600 rounded-t-lg"></div>
+          </div>
+        `
+      },
+      'garis-mengalir': {
+        title: 'Ritme Garis: Pola Mengalir (Gelombang Ombak)',
+        desc: 'Garis bergelombang meliuk-liuk secara harmonis menciptakan kesan dinamis air laut yang bergerak santai.',
+        html: `
+          <svg viewBox="0 0 320 80" class="w-full max-w-md h-20">
+            <path d="M 0 40 Q 40 10, 80 40 T 160 40 T 240 40 T 320 40" fill="none" stroke="#06b6d4" stroke-width="4" stroke-linecap="round" />
+            <path d="M 0 52 Q 40 22, 80 52 T 160 52 T 240 52 T 320 52" fill="none" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" opacity="0.8" />
+          </svg>
+        `
+      },
+      'bidang-teratur': {
+        title: 'Ritme Bidang: Pola Teratur (Papan Geometris)',
+        desc: 'Bidang persegi dengan ukuran sama ditata berulang menciptakan kesan keteraturan struktural yang kuat.',
+        html: `
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-pink-500 rounded-xl shadow-md"></div>
+            <div class="w-10 h-10 bg-pink-500 rounded-xl shadow-md"></div>
+            <div class="w-10 h-10 bg-pink-500 rounded-xl shadow-md"></div>
+            <div class="w-10 h-10 bg-pink-500 rounded-xl shadow-md"></div>
+          </div>
+        `
+      },
+      'bidang-alternasi': {
+        title: 'Ritme Bidang: Pola Alternasi (Kotak & Belah Ketupat)',
+        desc: 'Dua bidang dua dimensi berbeda bentuk disusun bergantian menghadirkan variasi motif ornamen yang kaya.',
+        html: `
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-purple-600 rounded-xl shadow-md"></div>
+            <div class="w-9 h-9 bg-amber-400 rotate-45 shadow-md"></div>
+            <div class="w-10 h-10 bg-purple-600 rounded-xl shadow-md"></div>
+            <div class="w-9 h-9 bg-amber-400 rotate-45 shadow-md"></div>
+          </div>
+        `
+      },
+      'bidang-progresi': {
+        title: 'Ritme Bidang: Pola Progresi (Segitiga Bertingkat)',
+        desc: 'Bidang segitiga yang bertambah besar ukurannya secara terarah memandu pandangan ke arah pusat kekuatan.',
+        html: `
+          <div class="flex items-center gap-3">
+            <svg viewBox="0 0 40 40" class="w-6 h-6"><polygon points="20,5 5,35 35,35" fill="#ec4899" /></svg>
+            <svg viewBox="0 0 40 40" class="w-8 h-8"><polygon points="20,5 5,35 35,35" fill="#ec4899" /></svg>
+            <svg viewBox="0 0 40 40" class="w-12 h-12"><polygon points="20,5 5,35 35,35" fill="#f59e0b" /></svg>
+            <svg viewBox="0 0 40 40" class="w-16 h-16"><polygon points="20,5 5,35 35,35" fill="#7c3aed" /></svg>
+          </div>
+        `
+      },
+      'bidang-mengalir': {
+        title: 'Ritme Bidang: Pola Mengalir (Daun Berkejaran)',
+        desc: 'Bidang organik lonjong berputar dengan sudut dinamis membentuk pusaran air atau dedaunan yang terbang.',
+        html: `
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-6 bg-emerald-500 rounded-full -rotate-12"></div>
+            <div class="w-10 h-6 bg-emerald-500 rounded-full rotate-12"></div>
+            <div class="w-10 h-6 bg-emerald-500 rounded-full -rotate-45"></div>
+            <div class="w-10 h-6 bg-emerald-500 rounded-full rotate-45"></div>
+          </div>
+        `
+      },
+      'warna-teratur': {
+        title: 'Ritme Warna: Pola Teratur (Monokromatis)',
+        desc: 'Pengulangan nada warna yang seirama dan seimbang menghadirkan ketenangan visual yang elegan.',
+        html: `
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-purple-700 shadow-md"></div>
+            <div class="w-12 h-12 rounded-2xl bg-purple-700 shadow-md"></div>
+            <div class="w-12 h-12 rounded-2xl bg-purple-700 shadow-md"></div>
+            <div class="w-12 h-12 rounded-2xl bg-purple-700 shadow-md"></div>
+          </div>
+        `
+      },
+      'warna-alternasi': {
+        title: 'Ritme Warna: Pola Alternasi (Kontras Komplementer)',
+        desc: 'Warna ungu cerah bergantian dengan kuning keemasan menghasilkan kontras visual yang saling menguatkan.',
+        html: `
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-purple-600 shadow-md"></div>
+            <div class="w-12 h-12 rounded-2xl bg-amber-400 shadow-md"></div>
+            <div class="w-12 h-12 rounded-2xl bg-purple-600 shadow-md"></div>
+            <div class="w-12 h-12 rounded-2xl bg-amber-400 shadow-md"></div>
+          </div>
+        `
+      },
+      'warna-progresi': {
+        title: 'Ritme Warna: Pola Progresi (Gradasi Spektrum Panas)',
+        desc: 'Perubahan warna secara bertahap dari kuning terang, oranye jingga, merah mawar, hingga ungu pekat.',
+        html: `
+          <div class="flex items-center gap-2">
+            <div class="w-10 h-14 rounded-xl bg-amber-300 shadow-xs"></div>
+            <div class="w-10 h-14 rounded-xl bg-amber-500 shadow-xs"></div>
+            <div class="w-10 h-14 rounded-xl bg-rose-500 shadow-xs"></div>
+            <div class="w-10 h-14 rounded-xl bg-purple-700 shadow-xs"></div>
+            <div class="w-10 h-14 rounded-xl bg-indigo-900 shadow-xs"></div>
+          </div>
+        `
+      },
+      'warna-mengalir': {
+        title: 'Ritme Warna: Pola Mengalir (Pelangi Spektrum Alam)',
+        desc: 'Warna-warni pelangi berpadu lembut tanpa batas patahan laksana bias cahaya matahari menembus tetes embun.',
+        html: `
+          <div class="w-full max-w-sm h-12 rounded-2xl bg-gradient-to-r from-rose-500 via-amber-400 via-emerald-400 via-sky-400 to-purple-600 shadow-md"></div>
+        `
+      }
+    };
+
+    function updateLabDisplay() {
+      const key = `${selectedLabElement}-${selectedLabRhythm}`;
+      const data = labDataMatrix[key] || labDataMatrix['titik-teratur'];
+
+      document.getElementById('labResultTitle').textContent = data.title;
+      document.getElementById('labResultDesc').textContent = data.desc;
+      document.getElementById('labPatternDisplay').innerHTML = data.html;
+    }
+
+    function setLabElement(elem) {
+      selectedLabElement = elem;
+      document.querySelectorAll('.lab-elem-btn').forEach(btn => {
+        btn.className = "lab-elem-btn px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition";
+      });
+      const activeBtn = document.getElementById('btn-elem-' + elem);
+      if (activeBtn) {
+        activeBtn.className = "lab-elem-btn px-3 py-2 rounded-xl bg-purple-600 text-white text-xs font-bold shadow-xs transition";
+      }
+      playMelodyTone();
+      updateLabDisplay();
+    }
+
+    function setLabRhythm(rhythm) {
+      selectedLabRhythm = rhythm;
+      document.querySelectorAll('.lab-rhythm-btn').forEach(btn => {
+        btn.className = "lab-rhythm-btn px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition";
+      });
+      const activeBtn = document.getElementById('btn-rhythm-' + rhythm);
+      if (activeBtn) {
+        activeBtn.className = "lab-rhythm-btn px-3 py-2 rounded-xl bg-pink-600 text-white text-xs font-bold shadow-xs transition";
+      }
+      playMelodyTone();
+      updateLabDisplay();
+    }
+
+    function speakLabExplanation() {
+      const key = `${selectedLabElement}-${selectedLabRhythm}`;
+      const data = labDataMatrix[key] || labDataMatrix['titik-teratur'];
+      speakIndoText(`${data.title}. ${data.desc}`);
+    }
+
+    /* ================= HTML5 DRAWING CANVAS STUDIO ================= */
+    let canvas, ctx;
+    let isDrawing = false;
+    let currentCanvasTool = 'brush';
+    let currentCanvasColor = '#7c3aed';
+
+    function initCanvasStudio() {
+      canvas = document.getElementById('artCanvas');
+      if (!canvas) return;
+      ctx = canvas.getContext('2d');
+      resizeCanvas();
+
+      // Mouse events
+      canvas.addEventListener('mousedown', startDrawing);
+      canvas.addEventListener('mousemove', drawMove);
+      window.addEventListener('mouseup', stopDrawing);
+
+      // Touch events for mobile screens
+      canvas.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousedown', {
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+      }, { passive: false });
+
+      canvas.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousemove', {
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+      }, { passive: false });
+
+      canvas.addEventListener('touchend', () => {
+        const mouseEvent = new MouseEvent('mouseup', {});
+        window.dispatchEvent(mouseEvent);
+      }, { passive: false });
+    }
+
+    function resizeCanvas() {
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+      clearCanvasStudio();
+    }
+
+    function setCanvasTool(tool) {
+      currentCanvasTool = tool;
+      document.querySelectorAll('#tool-brush, #tool-dots, #tool-wave, #tool-stamp').forEach(btn => {
+        btn.className = "px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition";
+      });
+      const activeBtn = document.getElementById('tool-' + tool);
+      if (activeBtn) {
+        activeBtn.className = "px-3 py-1.5 rounded-xl bg-purple-600 text-white font-bold text-xs shadow-xs transition";
+      }
+    }
+
+    function setCanvasColor(color) {
+      currentCanvasColor = color;
+    }
+
+    function getCanvasCoordinates(e) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      const pos = getCanvasCoordinates(e);
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+
+      if (currentCanvasTool === 'dots') {
+        drawDotRhythm(pos.x, pos.y);
+      } else if (currentCanvasTool === 'stamp') {
+        drawGeometricStamp(pos.x, pos.y);
+      }
+    }
+
+    function drawMove(e) {
+      if (!isDrawing) return;
+      const pos = getCanvasCoordinates(e);
+
+      if (currentCanvasTool === 'brush') {
+        ctx.strokeStyle = currentCanvasColor;
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+      } else if (currentCanvasTool === 'dots') {
+        drawDotRhythm(pos.x, pos.y);
+      } else if (currentCanvasTool === 'wave') {
+        drawWaveRhythm(pos.x, pos.y);
+      }
+    }
+
+    function stopDrawing() {
+      if (isDrawing) {
+        ctx.closePath();
+        isDrawing = false;
+      }
+    }
+
+    function drawDotRhythm(x, y) {
+      ctx.fillStyle = currentCanvasColor;
+      ctx.beginPath();
+      const radius = Math.floor(Math.random() * 6) + 3;
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function drawWaveRhythm(x, y) {
+      ctx.strokeStyle = currentCanvasColor;
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(x, y, 12, 0, Math.PI);
+      ctx.stroke();
+    }
+
+    function drawGeometricStamp(x, y) {
+      ctx.fillStyle = currentCanvasColor;
+      ctx.fillRect(x - 12, y - 12, 24, 24);
+      playSuccessTone();
+    }
+
+    function clearCanvasStudio() {
+      if (!ctx || !canvas) return;
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Draw subtle decorative rhythm hint grid
+      ctx.strokeStyle = '#f1f5f9';
+      ctx.lineWidth = 1;
+      for (let x = 20; x < canvas.width; x += 40) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+    }
+
+    window.addEventListener('resize', () => {
+      if (!document.getElementById('content-kanvas').classList.contains('hidden')) {
+        resizeCanvas();
+      }
+    });
+
+    /* ================= QUIZ ENGINE (PELUKIS CILIK SBDP) ================= */
+    const quizData = [
+      {
+        question: "Pengulangan satu atau lebih unsur seni rupa (seperti titik, garis, bidang, atau warna) secara teratur dan terus-menerus untuk menghasilkan kesan gerak disebut...",
+        options: [
+          "Prinsip Proporsi",
+          "Prinsip Ritme (Irama)",
+          "Prinsip Keseimbangan Asimetris",
+          "Prinsip Perspektif"
+        ],
+        correct: 1,
+        explanation: "Benar sekali! Prinsip ritme atau irama adalah pengulangan teratur dari unsur seni rupa yang menimbulkan kesan gerak dan harmoni."
+      },
+      {
+        question: "Susunan bentuk visual berupa lingkaran besar &rarr; lingkaran kecil &rarr; lingkaran besar &rarr; lingkaran kecil merupakan contoh dari jenis ritme...",
+        options: [
+          "Ritme Alternasi (Selang-Seling)",
+          "Ritme Teratur Murni",
+          "Ritme Progresi Membesar",
+          "Ritme Acak Tak Beraturan"
+        ],
+        correct: 0,
+        explanation: "Tepat! Ritme alternasi adalah pola pengulangan yang tersusun berselang-seling secara teratur antara dua unsur atau ukuran berbeda."
+      },
+      {
+        question: "Kain Batik Megamendung dari Cirebon sangat terkenal karena menerapkan ritme garis mengalir yang dipadukan dengan...",
+        options: [
+          "Titik-titik kasar tanpa warna",
+          "Tingkatan gradasi warna (dari biru tua ke putih)",
+          "Bentuk balok kubus tiga dimensi",
+          "Garis lurus patah-patah segitiga"
+        ],
+        correct: 1,
+        explanation: "Hebat! Ciri khas Batik Megamendung adalah garis awan meliuk mengalir yang diberi tingkatan gradasi warna biru yang meneduhkan."
+      },
+      {
+        question: "Pengulangan unsur titik dari ukuran sangat kecil, lalu sedang, hingga sangat besar secara berangsur-angsur disebut ritme...",
+        options: [
+          "Alternasi",
+          "Teratur seragam",
+          "Progresi (Gradasi)",
+          "Monokrom"
+        ],
+        correct: 2,
+        explanation: "Luar biasa! Ritme progresi atau gradasi adalah pengulangan dengan perubahan bertingkat (dari kecil ke besar atau sebaliknya)."
+      },
+      {
+        question: "Unsur seni rupa yang memiliki panjang, lebar, volume tiga dimensi, serta kedalaman ruang nyata disebut unsur...",
+        options: [
+          "Titik",
+          "Garis",
+          "Bidang (2D)",
+          "Bentuk (3D Form)"
+        ],
+        correct: 3,
+        explanation: "Sangat tepat! Bentuk (Form) adalah wujud tiga dimensi yang memiliki volume ruang (seperti kubus, bola, dan pilar candi)."
+      },
+      {
+        question: "Motif kain tradisional Nusantara yang menggunakan pengulangan bidang 4 elips kolang-kaling yang teratur mengelilingi satu poros adalah...",
+        options: [
+          "Batik Kawung",
+          "Batik Parang",
+          "Tenun Ikat",
+          "Batik Megamendung"
+        ],
+        correct: 0,
+        explanation: "Sempurna! Batik Kawung menerapkan ritme bidang elips teratur yang melambangkan keadilan dan kesucian hati."
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let quizScore = 0;
+    let quizAnswered = false;
+
+    function renderQuestion() {
+      quizAnswered = false;
+      const q = quizData[currentQuestionIndex];
+
+      document.getElementById('quizQuestionCount').textContent = `Pertanyaan ${currentQuestionIndex + 1} dari ${quizData.length}`;
+      document.getElementById('quizProgressBar').style.width = `${((currentQuestionIndex + 1) / quizData.length) * 100}%`;
+      document.getElementById('quizQuestionText').textContent = q.question;
+
+      const optionsGrid = document.getElementById('quizOptionsGrid');
+      optionsGrid.innerHTML = '';
+
+      const feedbackBox = document.getElementById('quizFeedbackBox');
+      feedbackBox.className = 'hidden p-4 rounded-2xl text-xs sm:text-sm';
+      feedbackBox.innerHTML = '';
+
+      const nextBtn = document.getElementById('quizNextBtn');
+      nextBtn.disabled = true;
+      nextBtn.className = "px-6 py-3 rounded-2xl bg-slate-200 text-slate-400 font-bold text-xs sm:text-sm cursor-not-allowed transition flex items-center gap-2";
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = "quiz-opt text-left p-4 rounded-2xl border-2 border-slate-200 bg-white hover:border-purple-500 hover:bg-purple-50/50 font-medium text-xs sm:text-sm text-slate-700 transition flex items-center justify-between";
+        btn.innerHTML = `
+          <div class="flex items-center gap-3">
+            <span class="w-7 h-7 rounded-xl bg-slate-100 text-slate-700 font-bold flex items-center justify-center text-xs shrink-0">${String.fromCharCode(65 + idx)}</span>
+            <span class="font-medium">${opt}</span>
+          </div>
+          <i class="fa-solid fa-chevron-right text-slate-300 text-xs"></i>
+        `;
+        btn.onclick = () => selectQuizOption(idx, btn);
+        optionsGrid.appendChild(btn);
+      });
+    }
+
+    function speakCurrentQuestion() {
+      const q = quizData[currentQuestionIndex];
+      speakIndoText(q.question);
+    }
+
+    function selectQuizOption(selectedIndex, buttonElement) {
+      if (quizAnswered) return;
+      quizAnswered = true;
+
+      const q = quizData[currentQuestionIndex];
+      const allOptBtns = document.querySelectorAll('.quiz-opt');
+      const feedbackBox = document.getElementById('quizFeedbackBox');
+      const nextBtn = document.getElementById('quizNextBtn');
+
+      allOptBtns.forEach(btn => btn.classList.add('pointer-events-none'));
+
+      if (selectedIndex === q.correct) {
+        quizScore++;
+        playSuccessTone();
+        buttonElement.classList.remove('border-slate-200', 'bg-white', 'hover:bg-purple-50/50');
+        buttonElement.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900', 'font-bold');
+
+        feedbackBox.classList.remove('hidden');
+        feedbackBox.classList.add('bg-emerald-100', 'text-emerald-950', 'border', 'border-emerald-200');
+        feedbackBox.innerHTML = `<strong><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> Jawaban Tepat Sekali!</strong> ${q.explanation}`;
+      } else {
+        playWrongTone();
+        buttonElement.classList.remove('border-slate-200', 'bg-white', 'hover:bg-purple-50/50');
+        buttonElement.classList.add('border-rose-500', 'bg-rose-50', 'text-rose-900');
+
+        allOptBtns[q.correct].classList.remove('border-slate-200', 'bg-white');
+        allOptBtns[q.correct].classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900', 'font-bold');
+
+        feedbackBox.classList.remove('hidden');
+        feedbackBox.classList.add('bg-rose-100', 'text-rose-950', 'border', 'border-rose-200');
+        feedbackBox.innerHTML = `<strong><i class="fa-solid fa-circle-xmark text-rose-600 mr-1"></i> Jawaban Kurang Tepat.</strong> ${q.explanation}`;
+      }
+
+      document.getElementById('quizScoreDisplay').textContent = `${quizScore} / ${quizData.length}`;
+      nextBtn.disabled = false;
+      nextBtn.className = "px-6 py-3 rounded-2xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs sm:text-sm cursor-pointer shadow-md transition flex items-center gap-2";
+    }
+
+    function nextQuizQuestion() {
+      if (currentQuestionIndex < quizData.length - 1) {
+        currentQuestionIndex++;
+        renderQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function finishQuiz() {
+      document.getElementById('quizContainer').classList.add('hidden');
+      const resultBox = document.getElementById('quizResultBox');
+      resultBox.classList.remove('hidden');
+
+      document.getElementById('quizFinalScore').textContent = quizScore;
+      const feedback = document.getElementById('quizFinalFeedback');
+
+      if (quizScore === 6) {
+        feedback.textContent = "Sempurna! Kamu pantas menyandang gelar 'Maestro Seni Rupa Cilik'! Pemahamanmu tentang prinsip ritme titik, garis, bidang, bentuk, warna, serta motif batik Nusantara sangat mendalam.";
+        playTadaTone();
+      } else if (quizScore >= 4) {
+        feedback.textContent = "Hebat sekali! Kamu sudah memahami konsep ritme dan kelima unsur seni rupa dengan sangat baik. Teruslah berkarya!";
+        playSuccessTone();
+      } else {
+        feedback.textContent = "Tetap semangat berkreasi! Buka kembali tab 'Konsep Ritme' dan 'Lima Unsur Ritme' untuk memperkuat wawasan senimu.";
+      }
+
+      if (window.confetti && quizScore >= 4) {
+        confetti({
+          particleCount: 100,
+          spread: 85,
+          origin: { y: 0.6 }
+        });
+      }
+    }
+
+    function restartQuiz() {
+      currentQuestionIndex = 0;
+      quizScore = 0;
+      document.getElementById('quizScoreDisplay').textContent = `0 / ${quizData.length}`;
+      document.getElementById('quizResultBox').classList.add('hidden');
+      document.getElementById('quizContainer').classList.remove('hidden');
+      renderQuestion();
+    }
+
+    // Initialize application on DOM content load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderQuestion();
+      updateLabDisplay();
+      initCanvasStudio();
+    });
+  </script>
+</body>
+</html>
